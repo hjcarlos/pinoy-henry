@@ -26,7 +26,8 @@ class Guesser:
             self.population.append(individual)
         self.current_generation = 0
     
-    def provide_initial_guess_to_gamemaster(self) -> str:
+    # Provide initial guess to GameMaster
+    def provide_initial_guess_word(self) -> str:
         return random.choice(self.population)
     
     def evaluate_population(self, game_master) -> List[Tuple[str, int]]:
@@ -167,6 +168,7 @@ class Guesser:
         new_evaluated_population = self.evaluate_population(game_master)
         return self.choose_best_offspring(new_evaluated_population)
     
+    # Provide optimized guess word to GameMaster
     def provide_optimized_guess_to_gamemaster(self, game_master) -> Tuple[str, int]:
         best_guess = self.perform_ga_to_generate_new_word(game_master)
         cost = game_master.return_cost_to_guesser(best_guess)
