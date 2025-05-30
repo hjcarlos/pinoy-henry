@@ -16,7 +16,7 @@ class Guesser:
         # Initialize population
         self.initialize_population()
     
-    # CHROMOSOME ENCODING: String-based encoding
+    # CHROMOSOME ENCODING: Value encoding (character-based)
     def initialize_population(self):
         """Create initial random population using string-based encoding"""
         self.population = []
