@@ -64,7 +64,8 @@ def main():
     
     # GAME PROPER
     # Guesser: Provide initial guess to GameMaster
-    initial_guess = guesser.provide_initial_guess_to_gamemaster()
+    initial_guess, initial_cost = guesser.provide_optimized_guess_to_gamemaster(game_master)
+    display_generation_result(0, initial_guess, initial_cost)
     initial_cost = game_master.return_cost_to_guesser(initial_guess)
     display_generation_result(0, initial_guess, initial_cost)
     
@@ -73,7 +74,7 @@ def main():
     costs = [initial_cost]
     
     # STOPPING TECHNIQUE: Maximum Generation (100)
-    max_generations = 100
+    max_generations = 1000
     solution_found = False
     
     # Evolution loop

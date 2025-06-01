@@ -11,7 +11,7 @@ class Guesser:
         self.current_generation = 0
         self.alphabet = string.ascii_lowercase
         self.crossover_rate = 0.8
-        self.mutation_rate = 0.1
+        self.mutation_rate = 0.05
         
         # Initialize population
         self.initialize_population()
@@ -43,7 +43,8 @@ class Guesser:
         # Convert cost to fitness (lower cost = higher fitness)
         max_cost = max(cost for _, cost in evaluated_population) if evaluated_population else 1
         fitness_scores = [(individual, max_cost - cost + 1) for individual, cost in evaluated_population]
-        
+                               #10         50 - 10 + 1 = 41                                                                                      
+                               #5          50 - 5 + 1 = 46                                   
         total_fitness = sum(fitness for _, fitness in fitness_scores)
         if total_fitness == 0:
             return random.choice([individual for individual, _ in fitness_scores])
@@ -72,8 +73,8 @@ class Guesser:
         length = len(parent1)
         
         # Select two random crossover points
-        point1 = random.randint(0, length - 1)
-        point2 = random.randint(0, length - 1)
+        point1 = random.randint(0, length - 1) #1
+        point2 = random.randint(0, length - 1) #3
         
         # Ensure point1 <= point2
         if point1 > point2:
@@ -83,13 +84,22 @@ class Guesser:
         offspring1 = [''] * length
         offspring2 = [''] * length
         
+        # HELLO
+        # WORLD
+
         # Copy substring from parents
         offspring1[point1:point2 + 1] = list(parent1[point1:point2 + 1])
         offspring2[point1:point2 + 1] = list(parent2[point1:point2 + 1])
+
+        # _ELL_
+        # _ORL_
         
         # Fill remaining positions maintaining order
         self._fill_remaining_positions(offspring1, parent2, point1, point2)
         self._fill_remaining_positions(offspring2, parent1, point1, point2)
+
+        # WELLO
+        # HORLH
         
         return ''.join(offspring1), ''.join(offspring2)
     
@@ -124,7 +134,7 @@ class Guesser:
         mutated = list(individual)
         for i in range(len(mutated)):
             if random.random() < self.mutation_rate:
-                mutated[i] = random.choice(self.alphabet)
+                mutated[i] = random.choice(self.alphabet) # HELLO -> XELLO
         return ''.join(mutated)
     
     def perform_mutation(self, individual: str) -> str:
